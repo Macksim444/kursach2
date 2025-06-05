@@ -1,0 +1,12 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Запись на встречу{% endblock %}
+
+{% block content %}
+    <h2>Записаться на встречу</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Записаться</button>
+    </form>
+{% endblock %}
