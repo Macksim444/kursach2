@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="" />
+    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/mysite/visitors/middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/users_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/appointment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2y5xnbMA1UpTn8SwCeBdt0d1XOx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -21,10 +47,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "terminal"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\kurs\mysite\visitors\templates\visitors" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="kurs" />

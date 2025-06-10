@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-(h249j&f#hc&ed*0m@k067ve=a#-c)elv_3pxog+%7l7_6i(df
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'visitors.CustomUser'
+\
 
 
 # Application definition
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'visitors.middleware.BlockedUserMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'

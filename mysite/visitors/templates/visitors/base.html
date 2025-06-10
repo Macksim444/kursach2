@@ -154,9 +154,17 @@
             </div>
             <div class="top-actions">
                 <button class="menu-btn">Перезвонить мне</button>
-                <a href="{% url 'register' %}" class="nav-button">Регистрация</a>
-                <a href="{% url 'login' %}" class="nav-button">Авторизация</a>
-                <a href="{% url 'appointment' %}" class="nav-button">Запись на встречу</a>
+                {% if user.is_authenticated %}
+    <p>Здравствуйте, {{ user.get_full_name|default:user.username }}!</p>
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Выход</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Авторизация</a> |
+    <a href="{% url 'register' %}">Регистрация</a>
+{% endif %}
+
                 <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="icon" alt="cart">
                 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111712.png" class="icon" alt="vk">
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="icon" alt="clock">
@@ -165,11 +173,14 @@
         </div>
     </div>
     <nav class="main-nav">
-        <a href="#">Животные <span class="arrow"></span></a>
-        <a href="#">Персонал <span class="arrow"></span></a>
-        <a href="{% url 'appointment' %}">Запись на встречу</a>
+        <a href="{% url 'admin:index' %}">Админ-панель</a>
+        <a href="#">Отделы</a>
+        <a href="#">Пропуски</a>
+        <a href="#">Персонал</a>
+        <a href="#">Запись на встречу</a>
         <a href="#">Мои встречи</a>
-        <a href="#">О нас <span class="arrow"></span></a>
+        <a href="{% url 'about' %}">О нас</a>
+        <a href="{% url 'users_list' %}">Пользователи</a>
     </nav>
     <main>
         {% block content %}{% endblock %}

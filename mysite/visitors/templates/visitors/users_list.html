@@ -1,0 +1,63 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Список пользователей{% endblock %}
+
+{% block content %}
+<h2>Пользователи системы</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Логин</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Дата регистрации</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
+            <td>
+                {% if user.is_blocked %}
+                    <span style="color:red; font-weight:bold;">Заблокирован</span>
+                {% else %}
+                    Активен
+                {% endif %}
+            </td>
+            <td>
+                {% if user != request.user %}
+                    {% if user.is_blocked %}
+                        <form action="{% url 'unblock_user' user.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:green; color:white; border:none; padding:5px 10px; cursor:pointer;">
+                                Разблокировать
+                            </button>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'block_user' user.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:#b30000; color:white; border:none; padding:5px 10px; cursor:pointer;">
+                                Заблокировать
+                            </button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8">Пользователи не найдены.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

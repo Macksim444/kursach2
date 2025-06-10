@@ -1,6 +1,20 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
-class AppointmentForm(forms.Form):
-    name = forms.CharField(label='Ваше имя', max_length=100)
-    date = forms.DateTimeField(label='Дата и время встречи', widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
-    purpose = forms.CharField(label='Цель встречи', widget=forms.Textarea, required=False)
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True, label='Email')
+    phone = forms.CharField(required=False, label='Телефон')
+    first_name = forms.CharField(required=True, label='Имя')
+    last_name = forms.CharField(required=True, label='Фамилия')
+    patronymic = forms.CharField(required=False, label='Отчество')
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email', 'phone', 'first_name', 'last_name', 'patronymic', 'password1', 'password2')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError('Пользователь с таким email уже существует.')
+        return email
