@@ -3,61 +3,120 @@
 {% block title %}Список пользователей{% endblock %}
 
 {% block content %}
-<h2>Пользователи системы</h2>
-<table border="1" cellpadding="8" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Логин</th>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Телефон</th>
-            <th>Дата регистрации</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
-            <td>
-                {% if user.is_blocked %}
-                    <span style="color:red; font-weight:bold;">Заблокирован</span>
-                {% else %}
-                    Активен
-                {% endif %}
-            </td>
-            <td>
-                {% if user != request.user %}
+<div style="width: 1200px; margin: 30px auto 0 auto; display: flex; flex-direction: column; align-items: center;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Пользователи системы</h2>
+
+    <div style="text-align: center; margin-bottom: 25px;">
+        <a href="?status=all" class="filter-button {% if filter_status == 'all' %}active{% endif %}">Все пользователи</a>
+        <a href="?status=active" class="filter-button {% if filter_status == 'active' %}active{% endif %}">Активные</a>
+        <a href="?status=blocked" class="filter-button {% if filter_status == 'blocked' %}active{% endif %}">Заблокированные</a>
+    </div>
+
+    <table border="1" cellpadding="12" cellspacing="0"
+           style="border-collapse: collapse; width: 100%; text-align: center; table-layout: fixed;">
+        <colgroup>
+            <col style="width: 14%;">  <!-- Логин -->
+            <col style="width: 15%;">  <!-- Фамилия -->
+            <col style="width: 15%;">  <!-- Имя -->
+            <col style="width: 30%;">  <!-- Email -->
+            <col style="width: 20%;">  <!-- Телефон -->
+            <col style="width: 18%;">  <!-- Дата регистрации -->
+            <col style="width: 15%;">   <!-- Статус -->
+            <col style="width: 20%;">  <!-- Действия -->
+        </colgroup>
+        <thead>
+            <tr style="background-color: #b30000; color: white;">
+                <th>Логин</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Дата регистрации</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td style="white-space: nowrap;">{{ user.username }}</td>
+                <td style="white-space: nowrap;">{{ user.last_name }}</td>
+                <td style="white-space: nowrap;">{{ user.first_name }}</td>
+                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ user.email }}</td>
+                <td style="white-space: nowrap;">{{ user.phone }}</td>
+                <td style="white-space: nowrap;">{{ user.date_joined|date:"d.m.Y H:i" }}</td>
+                <td>
                     {% if user.is_blocked %}
-                        <form action="{% url 'unblock_user' user.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" style="background:green; color:white; border:none; padding:5px 10px; cursor:pointer;">
-                                Разблокировать
-                            </button>
-                        </form>
+                        <span style="color:red; font-weight:bold;">Заблокирован</span>
                     {% else %}
-                        <form action="{% url 'block_user' user.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" style="background:#b30000; color:white; border:none; padding:5px 10px; cursor:pointer;">
-                                Заблокировать
-                            </button>
-                        </form>
+                        Активен
                     {% endif %}
-                {% else %}
-                    —
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="8">Пользователи не найдены.</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
+                </td>
+                <td>
+                    {% if user != request.user %}
+                        {% if user.is_blocked %}
+                            <form action="{% url 'unblock_user' user.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="action-button unblock">Разблокировать</button>
+                            </form>
+                        {% else %}
+                            <form action="{% url 'block_user' user.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="action-button block">Заблокировать</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8">Пользователи не найдены.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .filter-button {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-right: 8px;
+        background-color: #b30000;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    .filter-button:hover {
+        background-color: #800000;
+    }
+    .filter-button.active {
+        background-color: #800000;
+        box-shadow: 0 0 5px #b30000;
+    }
+    .action-button {
+        padding: 5px 14px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        font-size: 15px;
+    }
+    .action-button.block {
+        background-color: #b30000;
+    }
+    .action-button.block:hover {
+        background-color: #800000;
+    }
+    .action-button.unblock {
+        background-color: green;
+    }
+    .action-button.unblock:hover {
+        background-color: darkgreen;
+    }
+</style>
 {% endblock %}

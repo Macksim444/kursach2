@@ -4,8 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import get_user_model
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import get_user_model
-from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 
@@ -19,10 +17,16 @@ def block_user(request, user_id):
         user.save()
     return redirect(reverse('users_list'))
 
-@staff_member_required  # доступ только для сотрудников с доступом к админке
+@staff_member_required
 def users_list(request):
-    users = User.objects.all()
-    return render(request, 'visitors/users_list.html', {'users': users})
+    filter_status = request.GET.get('status', 'all')
+    if filter_status == 'blocked':
+        users = User.objects.filter(is_blocked=True)
+    elif filter_status == 'active':
+        users = User.objects.filter(is_blocked=False)
+    else:
+        users = User.objects.all()
+    return render(request, 'visitors/users_list.html', {'users': users, 'filter_status': filter_status})
 
 @staff_member_required
 def unblock_user(request, user_id):
