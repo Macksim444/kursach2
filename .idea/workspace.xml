@@ -7,7 +7,9 @@
     <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/users_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/users_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
