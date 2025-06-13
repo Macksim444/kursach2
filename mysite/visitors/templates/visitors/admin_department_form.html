@@ -1,0 +1,36 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}
+    {% if department %}Редактирование отдела{% else %}Добавление отдела{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>{% if department %}Редактирование отдела{% else %}Добавление отдела{% endif %}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+        {{ form.name.label_tag }}<br>
+        {{ form.name }}
+        {{ form.name.errors }}
+    </div>
+    <div>
+        {{ form.description.label_tag }}<br>
+        {{ form.description }}
+        {{ form.description.errors }}
+    </div>
+    <div>
+        {{ form.employees.label_tag }}<br>
+        {{ form.employees }}
+        {{ form.employees.errors }}
+    </div>
+    <div>
+        {{ form.working_hours.label_tag }}<br>
+        {{ form.working_hours }}
+        {{ form.working_hours.errors }}
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'admin_departments_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

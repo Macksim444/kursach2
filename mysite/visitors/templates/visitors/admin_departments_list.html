@@ -1,0 +1,40 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Управление отделами{% endblock %}
+
+{% block content %}
+<h2>Управление отделами</h2>
+
+<a href="{% url 'admin_department_add' %}" class="btn btn-success" style="margin-bottom: 15px;">Добавить отдел</a>
+
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr style="background-color: #b30000; color: white;">
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Сотрудники</th>
+            <th>Время работы</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dept in departments %}
+        <tr>
+            <td>{{ dept.name }}</td>
+            <td>{{ dept.description }}</td>
+            <td>{{ dept.employees }}</td>
+            <td>{{ dept.working_hours }}</td>
+            <td>
+                <a href="{% url 'admin_department_edit' dept.pk %}">Редактировать</a> |
+                <form action="{% url 'admin_department_delete' dept.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Удалить отдел?');" style="background:none; border:none; color:red; cursor:pointer;">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Отделы не найдены.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

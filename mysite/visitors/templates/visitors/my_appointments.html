@@ -1,0 +1,36 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Мои встречи{% endblock %}
+
+{% block content %}
+<h2>Мои встречи</h2>
+
+{% if appointments %}
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr style="background-color: #b30000; color: white;">
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Телефон</th>
+            <th>Цель визита</th>
+            <th>Дата записи</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appt in appointments %}
+        <tr>
+            <td>{{ appt.last_name }}</td>
+            <td>{{ appt.first_name }}</td>
+            <td>{{ appt.middle_name }}</td>
+            <td>{{ appt.phone }}</td>
+            <td>{{ appt.get_visit_purpose_display }}</td>
+            <td>{{ appt.created_at|date:"d.m.Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>У вас пока нет записей на встречи.</p>
+{% endif %}
+{% endblock %}

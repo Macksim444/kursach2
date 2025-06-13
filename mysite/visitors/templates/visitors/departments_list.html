@@ -1,0 +1,17 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Отделы{% endblock %}
+
+{% block content %}
+<h2>Отделы</h2>
+
+{% for dept in departments %}
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+    <h3>{{ dept.name }}</h3>
+    <p><strong>Описание:</strong> {{ dept.description }}</p>
+    <p><strong>Сотрудники:</strong> {{ dept.employees }}</p>
+</div>
+{% empty %}
+<p>Отделы не найдены.</p>
+{% endfor %}
+{% endblock %}

@@ -173,12 +173,14 @@
         </div>
     </div>
     <nav class="main-nav">
-        <a href="{% url 'admin:index' %}">Админ-панель</a>
-        <a href="#">Отделы</a>
+        {% if request.user.is_staff %}
+        <a href="{% url 'custom_admin_panel' %}" class="btn btn-secondary">Админ панель</a>
+        {% endif %}
+        <a href="{% url 'departments_list' %}" class="btn btn-primary">Отделы</a>
         <a href="#">Пропуски</a>
         <a href="#">Персонал</a>
-        <a href="#">Запись на встречу</a>
-        <a href="#">Мои встречи</a>
+        <a href="{% url 'appointment_create' %}" class="btn btn-primary">Запись на встречу</a>
+        <a href="{% url 'my_appointments' %}" class="btn btn-primary">Мои встречи</a>
         <a href="{% url 'about' %}">О нас</a>
         <a href="{% url 'users_list' %}">Пользователи</a>
     </nav>
