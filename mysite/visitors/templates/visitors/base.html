@@ -1,191 +1,215 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Koala's Smile{% endblock %}</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #000;
-            color: #fff;
-            height: 100%;
-            min-height: 100vh;
-        }
-        /* Верхняя белая панель */
-        .top-bar {
-            background: #fff;
-            color: #222;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 2px solid #00aaff; /* голубая линия */
-        }
-        .top-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 40px 0 40px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-right: 40px;
-        }
-        .contacts {
-            display: flex;
-            flex-direction: column;
-            font-size: 14px;
-            line-height: 1.3;
-        }
-        .contacts span {
-            display: block;
-        }
-        .worktime {
-            display: flex;
-            flex-direction: column;
-            font-size: 13px;
-            margin-left: 30px;
-        }
-        .top-actions {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .menu-btn {
-            background: #222;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 7px 18px;
-            font-size: 13px;
-            cursor: pointer;
-            margin-right: 12px;
-            transition: background-color 0.3s ease;
-        }
-        .menu-btn:hover {
-            background: #b30000;
-        }
-        .nav-button {
-            background-color: #b30000;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 7px 18px;
-            font-size: 13px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .nav-button:hover {
-            background-color: #e60000;
-        }
-        .icon {
-            width: 22px;
-            height: 22px;
-            margin: 0 3px;
-            opacity: 0.85;
-        }
-        /* Нижняя чёрная навигация */
-        .main-nav {
-            background: #181818;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 44px;
-            border-bottom: 2px solid #00aaff; /* голубая линия */
-        }
-        .main-nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 500;
-            margin: 0 28px;
-            position: relative;
-            padding: 8px 0;
-            transition: color 0.2s;
-        }
-        .main-nav a:hover,
-        .main-nav a.active {
-            color: #b30000;
-        }
-        .main-nav a .arrow {
-            border: solid #b30000;
-            border-width: 0 2px 2px 0;
-            display: inline-block;
-            padding: 3px;
-            margin-left: 6px;
-            transform: rotate(45deg);
-            -webkit-transform: rotate(45deg);
-        }
-        main {
-            width: 100vw;
-            height: calc(100vh - 110px); /* высота верхних панелей */
-            background: #fff;
-            color: #b30000;
-            border-radius: 0;
-            margin: 0;
-            padding: 40px 40px 40px 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            overflow-y: auto;
-            min-height: calc(100vh - 110px);
-        }
-    </style>
-    {% block extra_head %}{% endblock %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Система учёта посетителей организации{% endblock %}</title>
+
+  <!-- Подключение Google Fonts (по желанию) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Сброс и базовые стили */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #b30000;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #800000;
+      text-decoration: underline;
+    }
+
+    /* Контейнер */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex: 1 0 auto;
+    }
+
+    /* Хедер */
+    header {
+      background-color: #222;
+      color: #eee;
+      padding: 15px 0;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+    }
+    nav a:first-child {
+      margin-left: 0;
+    }
+
+    /* Основной контент */
+    main {
+      padding: 30px 0;
+      flex-grow: 1;
+    }
+
+    /* Футер */
+    footer {
+      background-color: #222;
+      color: #ccc;
+      padding: 40px 0 20px 0;
+      flex-shrink: 0;
+    }
+    footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    footer div {
+      margin-bottom: 20px;
+      min-width: 200px;
+      flex: 1;
+    }
+    footer h4 {
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    footer ul li {
+      margin-bottom: 8px;
+    }
+    footer ul li a {
+      color: #ccc;
+    }
+    footer ul li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer p {
+      margin: 0;
+      color: #ccc;
+      line-height: 1.4;
+    }
+    footer .copyright {
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 10px;
+        width: 100%;
+      }
+      nav a {
+        margin-left: 0;
+        margin-right: 15px;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+      footer .container {
+        flex-direction: column;
+      }
+      footer div {
+        min-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      main {
+        padding: 20px 10px;
+      }
+      nav a {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-content">
-            <div class="logo">Koala's Smile</div>
-            <div class="contacts">
-                <span>+79075634316</span>
-                <span>г. Томск</span>
-            </div>
-            <div class="worktime">
-                <span>Пн-Пт: 10:00-21:00</span>
-                <span>Сб-Вс: 11:00-22:00</span>
-            </div>
-            <div class="top-actions">
-                <button class="menu-btn">Перезвонить мне</button>
-                {% if user.is_authenticated %}
-    <p>Здравствуйте, {{ user.get_full_name|default:user.username }}!</p>
-    <form action="{% url 'logout' %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Выход</button>
-    </form>
-{% else %}
-    <a href="{% url 'login' %}">Авторизация</a> |
-    <a href="{% url 'register' %}">Регистрация</a>
-{% endif %}
 
-                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="icon" alt="cart">
-                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111712.png" class="icon" alt="vk">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="icon" alt="clock">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="icon" alt="info">
-            </div>
-        </div>
-    </div>
-    <nav class="main-nav">
+<header>
+  <div class="container">
+    <h1>Система учёта посетителей</h1>
+    <nav>
+      <a href="{% url 'home' %}">Главная</a>
+      <a href="{% url 'departments_list' %}">Отделы</a>
+      <a href="{% url 'my_appointments' %}">Мои встречи</a>
+      {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}
-        <a href="{% url 'custom_admin_panel' %}" class="btn btn-secondary">Админ панель</a>
+          <a href="{% url 'custom_admin_panel' %}">Админ панель</a>
         {% endif %}
-        <a href="{% url 'departments_list' %}" class="btn btn-primary">Отделы</a>
-        <a href="#">Пропуски</a>
-        <a href="#">Персонал</a>
-        <a href="{% url 'appointment_create' %}" class="btn btn-primary">Запись на встречу</a>
-        <a href="{% url 'my_appointments' %}" class="btn btn-primary">Мои встречи</a>
-        <a href="{% url 'about' %}">О нас</a>
-        <a href="{% url 'users_list' %}">Пользователи</a>
+        <a href="{% url 'logout' %}">Выйти</a>
+      {% else %}
+        <a href="{% url 'login' %}">Войти</a>
+      {% endif %}
     </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+  </div>
+</header>
+
+<main class="container">
+  {% block content %}
+  <!-- Контент страницы -->
+  {% endblock %}
+</main>
+
+<footer>
+  <div class="container">
+    <div>
+      <h4>Навигация</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Главная</a></li>
+        <li><a href="{% url 'departments_list' %}">Отделы</a></li>
+        <li><a href="{% url 'my_appointments' %}">Мои встречи</a></li>
+        {% if request.user.is_staff %}
+          <li><a href="{% url 'custom_admin_panel' %}">Админ панель</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div>
+      <h4>О системе</h4>
+      <p>Система учёта посетителей организации — современное решение для регистрации, контроля и анализа посещений. Удобный интерфейс, управление отделами и встречами, персональные профили и защищённый доступ.</p>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <p>Email: support@company.ru<br>Телефон: +7 (900) 000-00-00<br>Адрес: г. ВашГород, ул. Примерная, д. 1</p>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; {{ year|default:2025 }} Система учёта посетителей организации. Все права защищены.
+  </div>
+</footer>
+
 </body>
 </html>

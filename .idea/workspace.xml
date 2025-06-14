@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="Добавление ролей">
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/admin_department_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/admin_departments_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/all_appointments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/appointment_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/appointment_success.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/custom_admin_panel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/departments_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/my_appointments.html" afterDir="false" />
+    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="Создание встреч и админ панели">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/custom_admin_panel.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/custom_admin_panel.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,12 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1749758108377</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Создание встреч и админ панели">
+      <option name="closed" value="true" />
+      <created>1749822216431</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749822216431</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавление ролей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавление ролей" />
+    <MESSAGE value="Создание встреч и админ панели" />
+    <option name="LAST_COMMIT_MESSAGE" value="Создание встреч и админ панели" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
