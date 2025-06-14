@@ -10,7 +10,7 @@ urlpatterns = [
     path('users/', views.users_list, name='users_list'),
     path('users/block/<int:user_id>/', views.block_user, name='block_user'),
     path('users/unblock/<int:user_id>/', views.unblock_user, name='unblock_user'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('users/<int:user_id>/change_role/', views.change_user_role, name='change_user_role'),
     path('appointment/', views.appointment_create, name='appointment_create'),
     path('appointment/success/', views.appointment_success, name='appointment_success'),

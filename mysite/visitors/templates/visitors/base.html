@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% block title %}Система учёта посетителей организации{% endblock %}</title>
 
-  <!-- Подключение Google Fonts (по желанию) -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 
   <style>
@@ -33,7 +32,6 @@
       text-decoration: underline;
     }
 
-    /* Контейнер */
     .container {
       width: 90%;
       max-width: 1200px;
@@ -57,12 +55,52 @@
       margin: 0;
       font-size: 1.8rem;
     }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
     nav a {
-      margin-left: 20px;
       font-weight: 500;
     }
-    nav a:first-child {
-      margin-left: 0;
+
+    /* Блок с логином и аватаркой */
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 20px;
+      color: #eee;
+      font-weight: 600;
+    }
+    .user-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .user-avatar-placeholder {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #eee;
+      font-weight: bold;
+      font-size: 1.2rem;
+      user-select: none;
+    }
+    .logout-link {
+      color: #eee;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .logout-link:hover {
+      text-decoration: underline;
     }
 
     /* Основной контент */
@@ -131,10 +169,7 @@
         width: 100%;
       }
       nav a {
-        margin-left: 0;
-        margin-right: 15px;
-        display: inline-block;
-        margin-bottom: 8px;
+        margin: 0 15px 8px 0;
       }
       footer .container {
         flex-direction: column;
@@ -154,6 +189,9 @@
       nav a {
         font-size: 0.9rem;
       }
+      .user-info {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -170,12 +208,28 @@
         {% if request.user.is_staff %}
           <a href="{% url 'custom_admin_panel' %}">Админ панель</a>
         {% endif %}
-        <a href="{% url 'logout' %}">Выйти</a>
-      {% else %}
-        <a href="{% url 'login' %}">Войти</a>
       {% endif %}
     </nav>
+  {% if request.user.is_authenticated %}
+  <div style="display: flex; align-items: center; gap: 10px; margin-left: 20px; color: #eee; font-weight: 600;">
+    <span>{{ request.user.username }}</span>
+    {% if request.user.profile.avatar %}
+      <img src="{{ request.user.profile.avatar.url }}" alt="Аватар" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+    {% else %}
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: #555; display: flex; align-items: center; justify-content: center; color: #eee; font-weight: bold;">
+        {{ request.user.username|slice:":1"|upper }}
+      </div>
+    {% endif %}
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" style="background: none; border: none; color: #eee; cursor: pointer; font-weight: 600; padding: 0;">
+        Выйти
+      </button>
+    </form>
   </div>
+{% else %}
+  <a href="{% url 'login' %}" style="color: #eee; margin-left: 20px;">Войти</a>
+{% endif %}
 </header>
 
 <main class="container">
