@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="Адаптация под все размеры">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/settings.py" afterDir="false" />
+    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="налаженный вход и выход в аккаунт">
+      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,14 +130,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749910895641</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="налаженный вход и выход в аккаунт">
+      <option name="closed" value="true" />
+      <created>1749914850913</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749914850913</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавление ролей" />
     <MESSAGE value="Создание встреч и админ панели" />
     <MESSAGE value="Адаптация под все размеры" />
-    <option name="LAST_COMMIT_MESSAGE" value="Адаптация под все размеры" />
+    <MESSAGE value="налаженный вход и выход в аккаунт" />
+    <option name="LAST_COMMIT_MESSAGE" value="налаженный вход и выход в аккаунт" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -203,6 +203,7 @@
     <nav>
       <a href="{% url 'home' %}">Главная</a>
       <a href="{% url 'departments_list' %}">Отделы</a>
+      <a href="{% url 'appointment_create' %}" class="btn btn-primary">Запись на встречу</a>
       <a href="{% url 'my_appointments' %}">Мои встречи</a>
       {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}
