@@ -1,24 +1,30 @@
-{% extends 'visitors/base.html' %}
+{% extends "visitors/base.html" %}
 
 {% block title %}Мои встречи{% endblock %}
 
 {% block content %}
-<h2>Мои встречи</h2>
+<h2 style="margin-bottom:30px;">Мои встречи</h2>
 
-{% if appointments %}
-<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<table class="appointments-table">
     <thead>
-        <tr style="background-color: #b30000; color: white;">
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Телефон</th>
-            <th>Цель визита</th>
-            <th>Дата записи</th>
+        <tr>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Отдел</th>
+            <th>Статус</th>
+            <th>Действие</th>
         </tr>
     </thead>
     <tbody>
-        {% for appt in appointments %}
+    {% for appt in appointments %}
         <tr>
             <td>{{ appt.last_name }}</td>
             <td>{{ appt.first_name }}</td>
@@ -27,10 +33,65 @@
             <td>{{ appt.get_visit_purpose_display }}</td>
             <td>{{ appt.created_at|date:"d.m.Y H:i" }}</td>
         </tr>
-        {% endfor %}
+                {% if appointment.status == 'active' %}
+                    <form method="post" action="{% url 'cancel_appointment' appointment.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="cancel-btn" onclick="return confirm('Вы уверены, что хотите отменить встречу?');">Отменить</button>
+                    </form>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">У вас нет запланированных встреч.</td></tr>
+    {% endfor %}
     </tbody>
 </table>
-{% else %}
-<p>У вас пока нет записей на встречи.</p>
-{% endif %}
+
+<style>
+.appointments-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background: #fff;
+}
+.appointments-table th, .appointments-table td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 14px;
+    text-align: left;
+}
+.appointments-table th {
+    background: #b30000;
+    color: #fff;
+    font-weight: 600;
+}
+.cancel-btn {
+    background: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.cancel-btn:hover {
+    background: #800000;
+}
+.messages {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    padding: 0;
+    list-style: none;
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+}
+.messages li {
+    padding: 10px 15px;
+}
+</style>
 {% endblock %}

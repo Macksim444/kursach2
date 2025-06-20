@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="налаженный вход и выход в аккаунт">
+    <list default="true" id="5b1e9cba-4829-4937-88cd-61a5427258a2" name="Changes" comment="усовершествованный интерфейс">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/users_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/users_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/templates/visitors/my_appointments.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/templates/visitors/my_appointments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/visitors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/visitors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/visitors/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +55,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/kursach2-713f66c50ac92c276abc07d31260689eea431ebf&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
 }</component>
@@ -142,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749914850913</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="усовершествованный интерфейс">
+      <option name="closed" value="true" />
+      <created>1750325446526</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750325446526</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -150,7 +160,8 @@
     <MESSAGE value="Создание встреч и админ панели" />
     <MESSAGE value="Адаптация под все размеры" />
     <MESSAGE value="налаженный вход и выход в аккаунт" />
-    <option name="LAST_COMMIT_MESSAGE" value="налаженный вход и выход в аккаунт" />
+    <MESSAGE value="усовершествованный интерфейс" />
+    <option name="LAST_COMMIT_MESSAGE" value="усовершествованный интерфейс" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 
+
 class Department(models.Model):
     name = models.CharField('Название отдела', max_length=200)
     description = models.TextField('Описание отдела')
@@ -37,6 +38,11 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Appointment(models.Model):
+    STATUS_CHOICES = [
+        ('active', 'Активна'),
+        ('cancelled', 'Отменена'),
+    ]
+
     VISIT_PURPOSE_CHOICES = [
         ('credit', 'Кредит'),
         ('mortgage', 'Ипотека'),
@@ -59,7 +65,12 @@ class Appointment(models.Model):
     phone = models.CharField('Номер телефона', max_length=20)
     visit_purpose = models.CharField('Цель визита', max_length=20, choices=VISIT_PURPOSE_CHOICES)
 
+    status = models.CharField('Статус', max_length=20, choices=STATUS_CHOICES, default='active')
+
     created_at = models.DateTimeField('Дата создания записи', auto_now_add=True)
+
+    date = models.DateField('Дата встречи', null=True, blank=True)
+    time = models.TimeField('Время встречи', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Запись на встречу'
@@ -67,4 +78,4 @@ class Appointment(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.last_name} {self.first_name} — {self.get_visit_purpose_display()}'
+        return f'{self.last_name} {self.first_name} — {self.get_visit_purpose_display()} ({self.get_status_display()})'

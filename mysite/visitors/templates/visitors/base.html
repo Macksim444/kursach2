@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% block title %}Система учёта посетителей организации{% endblock %}</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 
   <style>
-    /* Сброс и базовые стили */
     *, *::before, *::after {
       box-sizing: border-box;
     }
@@ -16,7 +14,7 @@
       margin: 0;
       font-family: 'Roboto', Arial, sans-serif;
       background-color: #f9f9f9;
-      color: #333;
+      color: #222;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
@@ -31,7 +29,6 @@
       color: #800000;
       text-decoration: underline;
     }
-
     .container {
       width: 90%;
       max-width: 1200px;
@@ -39,58 +36,63 @@
       flex: 1 0 auto;
     }
 
-    /* Хедер */
     header {
       background-color: #222;
       color: #eee;
       padding: 15px 0;
     }
-    header .container {
+    .header-flex {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
     }
     header h1 {
       margin: 0;
       font-size: 1.8rem;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
     }
     nav {
       display: flex;
       align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      gap: 20px;
     }
     nav a {
       font-weight: 600;
       color: #D3D3D3;
       text-decoration: none;
+      white-space: nowrap;
       transition: color 0.3s ease;
+      font-size: 1rem;
     }
     nav a:hover, nav a:focus {
       color: #b30000;
       text-decoration: underline;
     }
-
-    /* Блок с логином и аватаркой */
-    .user-info {
+    .user-block {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-left: 20px;
+      margin-left: 30px;
+    }
+    .user-name {
       color: #eee;
       font-weight: 600;
     }
-    .user-info img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+    .user-avatar,
     .user-avatar-placeholder {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+      object-fit: cover;
       background: #555;
       display: flex;
       align-items: center;
@@ -102,7 +104,7 @@
     }
     .logout-link {
       color: #eee;
-      margin-left: 15px;
+      margin-left: 10px;
       text-decoration: none;
       font-weight: 600;
       background: none;
@@ -114,24 +116,43 @@
     .logout-link:hover {
       text-decoration: underline;
     }
-
-    /* Основной контент */
     main {
       padding: 30px 0;
       flex-grow: 1;
     }
-
-    /* Сообщение предупреждения */
-    #auth-warning {
-      display: none;
-      margin-bottom: 20px;
-      padding: 15px;
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      border-radius: 5px;
+    .departments-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #222;
     }
-
+    .department-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .department-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 20px 25px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      font-size: 1rem;
+    }
+    .department-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #222;
+    }
+    .department-card p {
+      margin: 6px 0;
+      color: #222;
+    }
+    .department-card b {
+      font-weight: 600;
+      color: #222;
+    }
     /* Футер */
     footer {
       background-color: #222;
@@ -180,19 +201,27 @@
       margin-top: 20px;
       width: 100%;
     }
-
-    /* Адаптивность */
+    @media (max-width: 900px) {
+      .container {
+        width: 98%;
+      }
+      .department-card {
+        padding: 15px 10px;
+      }
+    }
     @media (max-width: 768px) {
-      header .container {
+      .header-flex {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .header-left {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
       }
       nav {
-        margin-top: 10px;
-        width: 100%;
-      }
-      nav a {
-        margin: 0 15px 8px 0;
+        gap: 10px;
       }
       footer .container {
         flex-direction: column;
@@ -201,19 +230,21 @@
         min-width: 100%;
       }
     }
-
     @media (max-width: 480px) {
       header h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
       }
       main {
-        padding: 20px 10px;
+        padding: 15px 2px;
+      }
+      .department-card {
+        font-size: 0.95rem;
       }
       nav a {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
-      .user-info {
-        font-size: 0.9rem;
+      .user-block {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -221,47 +252,56 @@
 <body>
 
 <header>
-  <div class="container">
-    <h1>Система учёта посетителей</h1>
-    <nav>
-      <a href="{% url 'home' %}">Главная</a>
-      <a href="{% url 'departments_list' %}">Отделы</a>
-      <a href="{% url 'appointment_create' %}" id="appointment-link">Запись на встречу</a>
-      <a href="{% url 'about' %}">О нас</a>
-       {% if request.user.is_authenticated %}
-    <a href="{% url 'my_appointments' %}">Мои встречи</a>
-  {% endif %}
-      {% if request.user.is_authenticated %}
-        {% if request.user.is_staff %}
-          <a href="{% url 'custom_admin_panel' %}">Админ панель</a>
+  <div class="container header-flex">
+    <div class="header-left">
+      <h1>Система учёта посетителей</h1>
+      <nav>
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'departments_list' %}">Отделы</a>
+        <a href="{% url 'appointment_create' %}">Запись на встречу</a>
+        <a href="{% url 'about' %}">О нас</a>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'my_appointments' %}">Мои встречи</a>
+          {% if request.user.is_staff %}
+            <a href="{% url 'custom_admin_panel' %}">Админ панель</a>
+          {% endif %}
         {% endif %}
-      {% endif %}
-    </nav>
-
-    {% if request.user.is_authenticated %}
-    <div class="user-info">
-      <span>{{ request.user.username }}</span>
-      {% if request.user.profile.avatar %}
-        <img src="{{ request.user.profile.avatar.url }}" alt="Аватар">
-      {% else %}
-        <div class="user-avatar-placeholder">{{ request.user.username|slice:":1"|upper }}</div>
-      {% endif %}
-      <form method="post" action="{% url 'logout' %}" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="logout-link">Выйти</button>
-      </form>
+      </nav>
     </div>
-    {% else %}
-      <a href="{% url 'register' %}" style="color: #eee; margin-left: 20px;">Зарегистрироваться</a>
-      <a href="{% url 'login' %}" style="color: #eee; margin-left: 20px;">Войти</a>
-    {% endif %}
+    <div class="user-block">
+      {% if request.user.is_authenticated %}
+        <span class="user-name">{{ request.user.username }}</span>
+        {% if request.user.profile.avatar %}
+          <img src="{{ request.user.profile.avatar.url }}" alt="Аватар" class="user-avatar">
+        {% else %}
+          <div class="user-avatar-placeholder">{{ request.user.username|slice:":1"|upper }}</div>
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="logout-link">Выйти</button>
+        </form>
+      {% else %}
+        <a href="{% url 'register' %}" style="color: #eee; margin-left: 20px;">Зарегистрироваться</a>
+        <a href="{% url 'login' %}" style="color: #eee; margin-left: 20px;">Войти</a>
+      {% endif %}
+    </div>
   </div>
 </header>
 
 <main class="container">
-  <div id="auth-warning">Запись не возможна без входа в аккаунт</div>
   {% block content %}
-  <!-- Контент страницы -->
+  <div class="departments-title">Отделы</div>
+  <div class="department-list">
+    {% for department in departments %}
+      <div class="department-card">
+        <h3>{{ department.name }}</h3>
+        <p><b>Описание:</b> {{ department.description }}</p>
+        <p><b>Сотрудник:</b> {{ department.employees }}</p>
+      </div>
+    {% empty %}
+      <div>Нет отделов для отображения.</div>
+    {% endfor %}
+  </div>
   {% endblock %}
 </main>
 
@@ -291,20 +331,6 @@
     &copy; {{ year|default:2025 }} Система учёта посетителей организации. Все права защищены.
   </div>
 </footer>
-
-<script>
-  const userIsAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
-  const warningDiv = document.getElementById('auth-warning');
-  const appointmentLink = document.getElementById('appointment-link');
-
-  appointmentLink.addEventListener('click', function(event) {
-    if (!userIsAuthenticated) {
-      event.preventDefault();
-      warningDiv.style.display = 'block';
-      warningDiv.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-</script>
 
 </body>
 </html>

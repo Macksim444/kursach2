@@ -16,6 +16,16 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 
+@login_required
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id, user=request.user, status='active')
+    if request.method == 'POST':
+        appointment.status = 'cancelled'
+        appointment.save()
+        messages.success(request, 'Встреча успешно отменена.')
+    return redirect('my_appointments')
+
+    return redirect('my_appointments')
 @staff_member_required
 def admin_departments_list(request):
     departments = Department.objects.all()
