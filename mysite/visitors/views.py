@@ -16,6 +16,46 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
+from .forms import AppointmentEditForm
+from django.shortcuts import redirect, get_object_or_404, render
+from django.http import HttpResponseForbidden
+
+@login_required
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+
+    if appointment.user != request.user:
+        return HttpResponseForbidden("Вы не можете отменять чужие встречи.")
+
+    if request.method == 'POST':
+        appointment.status = 'cancelled'
+        appointment.save()
+        return redirect('my_appointments')
+
+    return redirect('my_appointments')
+
+def is_admin(user):
+    return user.is_superuser or user.groups.filter(name='admin').exists()
+
+@user_passes_test(is_admin)
+def edit_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+
+    if appointment.status == 'cancelled':
+        # Можно показать сообщение или просто редиректить
+        from django.contrib import messages
+        messages.error(request, "Отменённую встречу редактировать нельзя.")
+        return redirect('all_appointments')
+
+    if request.method == 'POST':
+        form = AppointmentEditForm(request.POST, instance=appointment)
+        if form.is_valid():
+            form.save()
+            return redirect('all_appointments')
+    else:
+        form = AppointmentEditForm(instance=appointment)
+
+    return render(request, 'visitors/admin_edit_appointment.html', {'form': form, 'appointment': appointment})
 
 @staff_member_required
 def admin_departments_list(request):
@@ -53,8 +93,12 @@ def departments_list(request):
 
 @staff_member_required
 def all_appointments(request):
-    appointments = Appointment.objects.select_related('user').all().order_by('-created_at')
-    return render(request, 'visitors/all_appointments.html', {'appointments': appointments})
+    appointments = Appointment.objects.all().order_by('date', 'time')
+    has_active_appointments = appointments.exclude(status='cancelled').exists()
+    return render(request, 'visitors/all_appointments.html', {
+        'appointments': appointments,
+        'has_active_appointments': has_active_appointments,
+    })
 
 @staff_member_required
 def custom_admin_panel(request):
@@ -62,8 +106,12 @@ def custom_admin_panel(request):
 
 @login_required
 def my_appointments(request):
-    appointments = request.user.appointments.all()
-    return render(request, 'visitors/my_appointments.html', {'appointments': appointments})
+    appointments = Appointment.objects.filter(user=request.user)
+    has_active_appointments = appointments.exclude(status='cancelled').exists()
+    return render(request, 'visitors/my_appointments.html', {
+        'appointments': appointments,
+        'has_active_appointments': has_active_appointments,
+    })
 
 def appointment_success(request):
     return render(request, 'visitors/appointment_success.html')

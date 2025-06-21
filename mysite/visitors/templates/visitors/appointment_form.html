@@ -5,44 +5,49 @@
 {% block content %}
 <h2>Запись на встречу</h2>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div>
-        {{ form.last_name.label_tag }}<br>
-        {{ form.last_name }}
-        {{ form.last_name.errors }}
-    </div>
-    <div>
-        {{ form.first_name.label_tag }}<br>
-        {{ form.first_name }}
-        {{ form.first_name.errors }}
-    </div>
-    <div>
-        {{ form.middle_name.label_tag }}<br>
-        {{ form.middle_name }}
-        {{ form.middle_name.errors }}
-    </div>
-    <div>
-        {{ form.phone.label_tag }}<br>
-        {{ form.phone }}
-        {{ form.phone.errors }}
-    </div>
-    <div>
-        {{ form.visit_purpose.label_tag }}<br>
-        {{ form.visit_purpose }}
-        {{ form.visit_purpose.errors }}
-    </div>
-    <div>
-        {{ form.passport_series.label_tag }}<br>
-        {{ form.passport_series }}
-        {{ form.passport_series.errors }}
-    </div>
-    <div>
-        {{ form.passport_number.label_tag }}<br>
-        {{ form.passport_number }}
-        {{ form.passport_number.errors }}
-    </div>
-    <button type="submit">Записаться</button>
-</form>
+{% if user.is_authenticated %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            {{ form.last_name.label_tag }}<br>
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+        </div>
+        <div>
+            {{ form.first_name.label_tag }}<br>
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+        </div>
+        <div>
+            {{ form.middle_name.label_tag }}<br>
+            {{ form.middle_name }}
+            {{ form.middle_name.errors }}
+        </div>
+        <div>
+            {{ form.phone.label_tag }}<br>
+            {{ form.phone }}
+            {{ form.phone.errors }}
+        </div>
+        <div>
+            {{ form.visit_purpose.label_tag }}<br>
+            {{ form.visit_purpose }}
+            {{ form.visit_purpose.errors }}
+        </div>
+        <div>
+            {{ form.passport_series.label_tag }}<br>
+            {{ form.passport_series }}
+            {{ form.passport_series.errors }}
+        </div>
+        <div>
+            {{ form.passport_number.label_tag }}<br>
+            {{ form.passport_number }}
+            {{ form.passport_number.errors }}
+        </div>
+        <button type="submit">Записаться</button>
+    </form>
+{% else %}
+    <p style="color: red; font-weight: bold;">Не возможно записаться на встречу, войдите в аккаунт.</p>
+{% endif %}
+
 {% endblock %}

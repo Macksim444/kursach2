@@ -1,0 +1,12 @@
+{% extends 'visitors/base.html' %}
+
+{% block title %}Редактировать встречу{% endblock %}
+
+{% block content %}
+<h2>Редактировать встречу</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="nav-button">Сохранить</button>
+</form>
+{% endblock %}

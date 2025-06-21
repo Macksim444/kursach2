@@ -5,32 +5,61 @@
 {% block content %}
 <h2>Мои встречи</h2>
 
-{% if appointments %}
-<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
-    <thead>
-        <tr style="background-color: #b30000; color: white;">
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Телефон</th>
-            <th>Цель визита</th>
-            <th>Дата записи</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for appt in appointments %}
-        <tr>
-            <td>{{ appt.last_name }}</td>
-            <td>{{ appt.first_name }}</td>
-            <td>{{ appt.middle_name }}</td>
-            <td>{{ appt.phone }}</td>
-            <td>{{ appt.get_visit_purpose_display }}</td>
-            <td>{{ appt.created_at|date:"d.m.Y H:i" }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% if user.is_authenticated %}
+    {% if appointments %}
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="background-color: #b30000; color: white;">
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Телефон</th>
+                <th>Цель визита</th>
+                <th>Дата встречи</th>
+                <th>Время встречи</th>
+                <th>Сотрудник</th>
+                <th>Номер пропуска</th>
+                <th>Статус</th>
+                {% if has_active_appointments %}
+                <th>Действия</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ appt.last_name }}</td>
+                <td>{{ appt.first_name }}</td>
+                <td>{{ appt.middle_name }}</td>
+                <td>{{ appt.phone }}</td>
+                <td>{{ appt.get_visit_purpose_display }}</td>
+                <td>{{ appt.date|date:"d.m.Y" }}</td>
+                <td>{{ appt.time|time:"H:i" }}</td>
+                <td>{{ appt.employee }}</td>
+                <td>{{ appt.pass_number }}</td>
+                <td>{{ appt.get_status_display }}</td>
+                {% if has_active_appointments %}
+                <td>
+                    {% if appt.status != 'cancelled' %}
+                    <form method="post" action="{% url 'cancel_appointment' appt.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Вы уверены, что хотите отменить встречу?');"
+                                style="background-color:#b30000; color:white; border:none; padding:5px 10px; cursor:pointer;">
+                            Отменить
+                        </button>
+                    </form>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>У вас нет запланированных встреч.</p>
+    {% endif %}
 {% else %}
-<p>У вас пока нет записей на встречи.</p>
+    <p>Пожалуйста, войдите в аккаунт, чтобы просмотреть встречи.</p>
 {% endif %}
+
 {% endblock %}

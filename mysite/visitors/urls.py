@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin-panel/departments/<int:pk>/edit/', views.admin_department_edit, name='admin_department_edit'),
     path('admin-panel/departments/<int:pk>/delete/', views.admin_department_delete, name='admin_department_delete'),
     path('departments/', views.departments_list, name='departments_list'),
+    path('appointments/<int:appointment_id>/edit/', views.edit_appointment, name='admin_edit_appointment'),
+    path('appointments/<int:appointment_id>/cancel/', views.cancel_appointment, name='cancel_appointment'),
 ]

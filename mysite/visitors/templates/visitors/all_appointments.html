@@ -15,7 +15,15 @@
             <th>Отчество</th>
             <th>Телефон</th>
             <th>Цель визита</th>
+            <th>Дата встречи</th>
+            <th>Время встречи</th>
+            <th>Сотрудник</th>
+            <th>Номер пропуска</th>
+            <th>Статус</th>
             <th>Дата создания</th>
+            {% if has_active_appointments %}
+            <th>Действия</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -27,7 +35,24 @@
             <td>{{ appt.middle_name }}</td>
             <td>{{ appt.phone }}</td>
             <td>{{ appt.get_visit_purpose_display }}</td>
+            <td>{{ appt.date|date:"d.m.Y" }}</td>
+            <td>{{ appt.time|time:"H:i" }}</td>
+            <td>{{ appt.employee }}</td>
+            <td>{{ appt.pass_number }}</td>
+            <td>{{ appt.get_status_display }}</td>
             <td>{{ appt.created_at|date:"d.m.Y H:i" }}</td>
+            {% if has_active_appointments %}
+            <td>
+                {% if appt.status != 'cancelled' %}
+                <a href="{% url 'admin_edit_appointment' appt.id %}" class="nav-button"
+                   style="padding: 4px 8px; background-color: #b30000; color: white; text-decoration: none; border-radius: 3px;">
+                   Редактировать
+                </a>
+                {% else %}
+                <span style="color:gray;">Отменена</span>
+                {% endif %}
+            </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
